@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script>
+        function MakeApiCall(){
+            var RepoName = document.getElementById("RepoName").value;
+            var SCMGroup = document.getElementById("SCMGroup").value;
+            document.getElementById("test").innerHTML = "form submitted"
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/postman", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({
+                value: 'value'
+            }));
+            xhr.onload = function() {
+              console.log("HELLO")
+              console.log(this.responseText);
+              var data = JSON.parse(this.responseText);
+              console.log(data);
+            }
+            
+            
+        }
+</script>
+    <h1 id="Header">Self Service Portal</h1>
+
+<form id="form" action="">
+    <label for="RepoName">Repository Name:</label><br>
+    <input type="text" id="RepoName" name="RepoName"><br>
+    
+    <label for="SCMGroup">SCM Group(only base of the name, "scm_ecd_devl" becomes "ecd"):</label><br>
+    <input type="text" id="SCMGroup" name="SCMGroup"><br>
+    
+    <input type="checkbox" id="readme" name="readme" value="readme">
+    <label for="readme">I want a README file included</label><br>
+    
+    <input type="submit" value="Submit" onclick="MakeApiCall()">
+</form>
+    <div id=test></div>
+</body>
+</html>
